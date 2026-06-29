@@ -15,11 +15,74 @@ import {
 import Hero from "@/components/Hero";
 import FeatureCard from "@/components/FeatureCard";
 import CTABanner from "@/components/CTABanner";
+import { COMPANY, SERVING_LINE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Business Security Camera Systems — IP Surveillance South Florida",
+  title: "Business Security Camera Systems — Broward County, FL",
   description:
-    "Professional IP security camera installation for South Florida businesses. 4K cameras, NVR recording, AI analytics, cloud storage, and mobile access. VoIP Made Simple Inc.",
+    "Professional IP security camera installation for Broward County businesses. 4K cameras, NVR recording, AI analytics, cloud storage and mobile access — installed with clean, labeled cabling. Call (954) 975-4899.",
+  alternates: { canonical: "/services/security-cameras" },
+};
+
+const CAMERA_FAQS = [
+  {
+    q: "Are these business cameras or the kind I'd buy at a big-box store?",
+    a: "Business-grade. We install professional IP camera systems with ruggedized hardware, encrypted streams, proper retention storage and clean, labeled cabling — built for compliance, HR and insurance needs, not a consumer doorbell.",
+  },
+  {
+    q: "Can I view my cameras from my phone?",
+    a: "Yes. View any camera live from your phone, tablet or laptop, review recorded footage, and receive motion or AI-based alerts — from anywhere, on any device.",
+  },
+  {
+    q: "How long is footage stored?",
+    a: "It depends on your camera count, resolution and retention needs. We size NVR storage accordingly and can add hybrid cloud backup so footage survives even if on-site hardware is damaged or stolen. We'll recommend a retention plan that fits your requirements.",
+  },
+  {
+    q: "Do you run the cabling for the cameras too?",
+    a: "We do. We install the low-voltage cabling and PoE infrastructure with the same clean, labeled standard as the rest of your network — ideally during a build-out while walls and pathways are open.",
+  },
+];
+
+const SERVICE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Business Security Camera System Installation",
+  provider: {
+    "@type": "LocalBusiness",
+    name: COMPANY.name,
+    telephone: COMPANY.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: COMPANY.address.street,
+      addressLocality: COMPANY.address.city,
+      addressRegion: COMPANY.address.state,
+      postalCode: COMPANY.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: { "@type": "AdministrativeArea", name: "Broward County, Florida" },
+  description:
+    "Professional IP security camera installation: 4K cameras, NVR/hybrid recording, AI analytics, cloud backup, mobile access and multi-site monitoring.",
+};
+
+const BREADCRUMB_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://voipmsi.com" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://voipmsi.com/services" },
+    { "@type": "ListItem", position: 3, name: "Security Cameras", item: "https://voipmsi.com/services/security-cameras" },
+  ],
+};
+
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: CAMERA_FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 
 const DEPLOYMENTS = [
@@ -98,11 +161,17 @@ const USE_CASES = [
 export default function SecurityCamerasPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_JSON_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
+
       <Hero
         badge="Security Cameras"
         headline="Protect What You've Built — With Surveillance That Sees Everything."
         subheadline="Modern IP camera systems with 4K clarity, AI analytics, and 24/7 remote access from any device. Built for business, not consumers."
         primaryCta={{ label: "Request a Free Security Assessment", href: "/contact" }}
+        secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
+        note={SERVING_LINE}
         size="md"
       />
 
@@ -201,10 +270,28 @@ export default function SecurityCamerasPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="bg-white py-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-heading font-bold text-gray-900 mb-10 text-center">
+            Business Security Cameras — Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            {CAMERA_FAQS.map((f) => (
+              <div key={f.q} className="p-6 rounded-2xl bg-gray-50 border border-gray-100">
+                <h3 className="font-semibold text-gray-900 mb-2">{f.q}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTABanner
         heading="See Your Business Clearly — From Anywhere."
         subheading="Request a free security assessment and we'll design the right system for your facility."
         primaryCta={{ label: "Request a Free Security Assessment", href: "/contact" }}
+        secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
         variant="dark"
       />
     </>

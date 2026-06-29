@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle, AlertCircle, Send } from "lucide-react";
+import { AlertCircle, Send } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import { trackFormSubmit } from "@/lib/analytics";
 
@@ -64,15 +65,21 @@ interface QuoteFormProps {
   dark?: boolean;
   /** Identifies which CTA produced the lead (e.g. "Free Assessment", "Site Survey"). */
   formType?: string;
+  /** Thank-you page variant to redirect to on success (matches /thank-you?type=...). */
+  thankYouType?: "assessment" | "site-survey" | "consultation" | "quote";
 }
 
-export default function QuoteForm({ dark = false, formType = "Quote Request" }: QuoteFormProps) {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+export default function QuoteForm({
+  dark = false,
+  formType = "Quote Request",
+  thankYouType = "assessment",
+}: QuoteFormProps) {
+  const router = useRouter();
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
@@ -98,8 +105,8 @@ export default function QuoteForm({ dark = false, formType = "Quote Request" }: 
 
       if (!res.ok) throw new Error("Submission failed");
       trackFormSubmit(formType);
-      setStatus("success");
-      reset();
+      // Redirect to the trackable thank-you page. Stays in "loading" through nav.
+      router.push(`/thank-you?type=${thankYouType}`);
     } catch {
       setStatus("error");
     }
@@ -115,30 +122,6 @@ export default function QuoteForm({ dark = false, formType = "Quote Request" }: 
   const labelClass = `block text-xs font-semibold uppercase tracking-wide mb-1.5 ${
     dark ? "text-gray-400" : "text-gray-600"
   }`;
-
-  if (status === "success") {
-    return (
-      <div className="flex flex-col items-center justify-center py-16 text-center">
-        <CheckCircle className="w-16 h-16 text-brand-green mb-4" />
-        <h3 className={`text-2xl font-bold mb-2 ${dark ? "text-white" : "text-gray-900"}`}>
-          We Received Your Request!
-        </h3>
-        <p className={`max-w-sm ${dark ? "text-gray-400" : "text-gray-600"}`}>
-          One of our specialists will reach out within one business day. Need us sooner? Call{" "}
-          <a href={COMPANY.phoneHref} className="text-brand-green font-semibold">
-            {COMPANY.phone}
-          </a>
-          .
-        </p>
-        <button
-          onClick={() => setStatus("idle")}
-          className="mt-6 text-sm text-brand-green hover:underline"
-        >
-          Submit another request
-        </button>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
