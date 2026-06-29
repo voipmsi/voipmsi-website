@@ -1,13 +1,76 @@
 import type { Metadata } from "next";
-import { Search, PenTool, Wrench, FileText, CheckCircle } from "lucide-react";
+import { Search, PenTool, Wrench, FileText, CheckCircle, MapPin } from "lucide-react";
 import Hero from "@/components/Hero";
 import FeatureCard from "@/components/FeatureCard";
 import CTABanner from "@/components/CTABanner";
+import { COMPANY, SERVING_LINE, SERVICE_AREAS } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Structured Cabling & Data Network Installation — South Florida",
+  title: "Structured Cabling & Data Cabling Contractor — Broward County",
   description:
-    "Professional structured cabling services in South Florida. Cat6, Cat6a, fiber optic, server room build-outs, and Fluke-certified testing. VoIP Made Simple Inc.",
+    "Structured cabling contractor in Broward County: Cat6, Cat6a, fiber, racks, patch panels and certified testing for Lauderhill, Fort Lauderdale and South Florida businesses. Free site survey. Call (954) 975-4899.",
+  alternates: { canonical: "/services/structured-cabling" },
+};
+
+const CABLING_FAQS = [
+  {
+    q: "Do you offer a free cabling site survey?",
+    a: "Yes. Before we quote anything, we walk your space, measure the runs, count the drops and identify obstacles — so there are no surprises on installation day. The site survey is free and there's no obligation.",
+  },
+  {
+    q: "What areas do you serve for structured cabling?",
+    a: "We're based in Lauderhill and install structured cabling throughout Broward County — Fort Lauderdale, Plantation, Sunrise, Tamarac, Davie, Coral Springs, Oakland Park and beyond. Being local means we're on-site fast and we know the buildings.",
+  },
+  {
+    q: "Cat6 or Cat6a — which do we need?",
+    a: "It depends on your bandwidth needs and how long you want the cabling to last. Cat6 handles gigabit easily for most offices; Cat6a supports 10-gigabit over longer runs and is a smart future-proofing choice for new build-outs. We'll recommend based on your actual usage and budget.",
+  },
+  {
+    q: "Will the work be tested and documented?",
+    a: "Always. Every drop is tested and certified, labeled at both ends, and delivered with as-built documentation and a test report. The next technician who touches your network — including us — will know exactly what's where.",
+  },
+];
+
+const SERVICE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Structured Cabling & Data Cabling Installation",
+  provider: {
+    "@type": "LocalBusiness",
+    name: COMPANY.name,
+    telephone: COMPANY.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: COMPANY.address.street,
+      addressLocality: COMPANY.address.city,
+      addressRegion: COMPANY.address.state,
+      postalCode: COMPANY.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: { "@type": "AdministrativeArea", name: "Broward County, Florida" },
+  description:
+    "Professional structured cabling: Cat6/Cat6a copper, fiber optic, network racks, patch panels, wireless access point cabling, certification and documentation.",
+};
+
+const BREADCRUMB_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://voipmsi.com" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://voipmsi.com/services" },
+    { "@type": "ListItem", position: 3, name: "Structured Cabling", item: "https://voipmsi.com/services/structured-cabling" },
+  ],
+};
+
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: CABLING_FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 
 const INSTALLATIONS = [
@@ -82,11 +145,17 @@ const PROCESS = [
 export default function StructuredCablingPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_JSON_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
+
       <Hero
-        badge="Structured Cabling"
+        badge="Structured Cabling — Data Cabling Contractor"
         headline="Structured Cabling Done Right — The First Time."
-        subheadline="Your network is only as reliable as the cable inside the wall. We design, install, and certify cabling infrastructure that's built to last 15+ years."
+        subheadline="Your network is only as reliable as the cable inside the wall. We design, install and certify Cat6/Cat6a and fiber cabling built to last — for businesses across Broward County."
         primaryCta={{ label: "Request a Free Site Survey", href: "/contact" }}
+        secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
+        note={SERVING_LINE}
         size="md"
       />
 
@@ -179,10 +248,45 @@ export default function StructuredCablingPage() {
         </div>
       </section>
 
+      {/* Service Areas + FAQ */}
+      <section className="bg-white py-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-brand-green/10 text-brand-green border border-brand-green/20 mb-4">
+              <MapPin className="w-3.5 h-3.5" />
+              Local Broward Cabling Contractor
+            </div>
+            <p className="text-gray-600 leading-relaxed">
+              Based in Lauderhill, we run and certify structured cabling for businesses across Broward County:
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 mt-5">
+              {SERVICE_AREAS.map((c) => (
+                <span key={c.slug} className="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-600">
+                  {c.name}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <h2 className="text-3xl font-heading font-bold text-gray-900 mt-16 mb-10 text-center">
+            Structured Cabling — Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            {CABLING_FAQS.map((f) => (
+              <div key={f.q} className="p-6 rounded-2xl bg-gray-50 border border-gray-100">
+                <h3 className="font-semibold text-gray-900 mb-2">{f.q}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTABanner
         heading="Building Out an Office? Renovating? Let's Wire It Right."
         subheading="Request a free site survey and we'll spec out exactly what you need."
         primaryCta={{ label: "Request a Free Site Survey", href: "/contact" }}
+        secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
         variant="dark"
       />
     </>

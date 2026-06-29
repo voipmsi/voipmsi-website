@@ -157,12 +157,12 @@ export default function ContactPage() {
             <div className="lg:col-span-3">
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
                 <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">
-                  Request a Free Quote
+                  Schedule a Free Assessment
                 </h2>
                 <p className="text-gray-500 text-sm mb-8">
-                  Fill out the form below and one of our specialists will get back to you within one business day.
+                  Tell us about your business and what&apos;s not working. One of our local specialists will get back to you within one business day — no pressure, no obligation.
                 </p>
-                <QuoteForm />
+                <QuoteForm formType="Free Assessment (Contact Page)" />
               </div>
             </div>
           </div>

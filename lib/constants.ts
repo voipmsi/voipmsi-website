@@ -178,6 +178,7 @@ export const SERVICES_NAV = [
   { label: "Structured Cabling", href: "/services/structured-cabling" },
   { label: "Business VoIP Phone Systems", href: "/services/voip-systems" },
   { label: "Security Cameras", href: "/services/security-cameras" },
+  { label: "Office Moves & Buildouts", href: "/services/office-moves" },
 ];
 
 // Primary South Florida communities we serve. Drives local-SEO city pages
@@ -209,6 +210,7 @@ export const NAV_LINKS = [
     href: "/services",
     children: SERVICES_NAV,
   },
+  { label: "Service Areas", href: "/locations" },
   { label: "Partners", href: "/partners" },
   { label: "Contact", href: "/contact" },
 ];

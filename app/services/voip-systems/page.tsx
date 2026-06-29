@@ -1,15 +1,116 @@
 import type { Metadata } from "next";
-import { CheckCircle, Cloud, Server, Phone, Wifi, Monitor } from "lucide-react";
+import { CheckCircle, Cloud, Server, Phone, Wifi, Monitor, Layers, Users } from "lucide-react";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
 import FeatureCard from "@/components/FeatureCard";
 import CTABanner from "@/components/CTABanner";
-import { UCM_PRODUCTS, IP_PHONES } from "@/lib/constants";
+import { UCM_PRODUCTS, IP_PHONES, COMPANY, SERVING_LINE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "VoIP Phone Systems — On-Premise & Cloud Hosted PBX",
+  title: "Business VoIP Phone Systems — Hosted, On-Premise & Hybrid",
   description:
-    "Enterprise VoIP phone systems for South Florida businesses. Grandstream UCM on-premise PBX, Yealink and Cisco IP phones, and hosted cloud VoIP solutions. Authorized Grandstream distributor.",
+    "Hosted cloud VoIP, on-premise IP PBX, or hybrid for Broward County businesses. We help you choose, then install and support Grandstream, Yealink and Cisco — with number porting, auto attendants, call queues and CRM integration.",
+  alternates: { canonical: "/services/voip-systems" },
+};
+
+const VOIP_OPTIONS = [
+  {
+    icon: Cloud,
+    name: "Hosted Cloud VoIP",
+    summary: "Your phone system lives in the cloud. No PBX hardware on site.",
+    pros: ["No upfront hardware investment", "Scales up or down in minutes", "Works from office, home and mobile", "Carrier-grade redundancy included", "Predictable monthly per-seat cost"],
+    cons: ["Ongoing monthly per-seat fees", "Depends on reliable internet (we design for this)"],
+    bestFor: "Remote/hybrid teams, multi-site businesses, and offices that want enterprise features without capital outlay.",
+  },
+  {
+    icon: Server,
+    name: "On-Premise IP PBX",
+    summary: "You own the PBX. It runs on site for full control.",
+    pros: ["Full system ownership — no per-seat fees", "Deep customization and integrations", "Great for compliance-sensitive offices", "Lower long-term cost at scale"],
+    cons: ["Higher upfront hardware cost", "You own maintenance (we support it)"],
+    bestFor: "Businesses with strong internal IT, compliance needs, existing infrastructure, or many seats where owning pays off.",
+  },
+  {
+    icon: Layers,
+    name: "Hybrid VoIP",
+    summary: "On-premise control where you need it, cloud flexibility where you don't.",
+    pros: ["Keep on-site control + cloud mobility", "Smooth path from legacy to cloud", "Per-location flexibility", "Resilience across sites"],
+    cons: ["More design up front (we handle it)", "Requires a partner who knows both worlds"],
+    bestFor: "Multi-location operations and businesses transitioning from a legacy system at their own pace.",
+  },
+];
+
+const VOIP_FEATURES = [
+  "Number porting (keep your numbers)",
+  "Auto attendants & IVR menus",
+  "Call queues & ring groups",
+  "Mobile & desktop softphone apps",
+  "Voicemail to email",
+  "Call recording",
+  "CRM integration",
+  "Multi-location support",
+  "Local installation & support",
+];
+
+const VOIP_FAQS = [
+  {
+    q: "Hosted, on-premise, or hybrid — which is right for us?",
+    a: "It depends on your team size, how mobile your staff is, your budget structure (monthly vs. upfront), and any compliance needs. Hosted suits most small and multi-site businesses; on-premise pays off at scale or where control matters; hybrid bridges the two. We assess your situation and recommend honestly — we install all three.",
+  },
+  {
+    q: "Can we keep our existing phone numbers?",
+    a: "Yes. We handle number porting from your current carrier so you keep every number. We schedule the port carefully to avoid any gap in service.",
+  },
+  {
+    q: "Do you install and support the system locally?",
+    a: "Yes. We're based in Lauderhill and provide local installation, configuration, staff training and ongoing support — not a remote 1-800 line. We program your auto attendants, call queues and voicemail-to-email and make sure it all works.",
+  },
+  {
+    q: "Will our internet handle VoIP calls?",
+    a: "That's exactly why we also design networks. We size your connection and tune your network — voice VLAN, QoS, PoE switching — so calls are clear and reliable. Poor call quality is almost always a network issue, and we fix it at the source.",
+  },
+];
+
+const SERVICE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Business VoIP Phone System Installation",
+  provider: {
+    "@type": "LocalBusiness",
+    name: COMPANY.name,
+    telephone: COMPANY.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: COMPANY.address.street,
+      addressLocality: COMPANY.address.city,
+      addressRegion: COMPANY.address.state,
+      postalCode: COMPANY.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: { "@type": "AdministrativeArea", name: "Broward County, Florida" },
+  description:
+    "Hosted cloud VoIP, on-premise IP PBX and hybrid phone system selection, installation and support, including number porting, auto attendants, call queues and CRM integration.",
+};
+
+const BREADCRUMB_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://voipmsi.com" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://voipmsi.com/services" },
+    { "@type": "ListItem", position: 3, name: "Business VoIP Phone Systems", item: "https://voipmsi.com/services/voip-systems" },
+  ],
+};
+
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: VOIP_FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 
 const CLOUD_FEATURES = [
@@ -34,14 +135,88 @@ const PHONE_TIERS: Record<string, { label: string; color: string }> = {
 export default function VoIPSystemsPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_JSON_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
+
       <Hero
-        badge="VoIP Phone Systems"
-        headline="Enterprise-Grade VoIP Systems — On-Premise & Cloud"
-        subheadline="From a 5-person office to a 3,000-seat enterprise, we deploy and support the VoIP systems that power modern business communication."
-        primaryCta={{ label: "Request a Free Consultation", href: "/contact" }}
-        secondaryCta={{ label: "View Our Partners", href: "/partners" }}
+        badge="Business VoIP Phone Systems"
+        headline="Hosted, On-Premise & Hybrid VoIP — We Help You Choose"
+        subheadline="From a 5-person office to a 3,000-seat enterprise, we help South Florida businesses pick the right phone system, then install and support it locally."
+        primaryCta={{ label: "Schedule a Free Assessment", href: "/contact" }}
+        secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
+        note={SERVING_LINE}
         size="md"
       />
+
+      {/* Hosted vs On-Premise vs Hybrid */}
+      <section className="bg-white py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl font-heading font-bold text-gray-900 mb-4">
+              Hosted, On-Premise, or Hybrid?
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              There&apos;s no single &ldquo;best&rdquo; VoIP system — only the best fit for your business. Here&apos;s an honest comparison of all three.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {VOIP_OPTIONS.map((opt) => (
+              <div key={opt.name} className="flex flex-col p-7 rounded-2xl bg-gray-50 border border-gray-100">
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center mb-4">
+                  <opt.icon className="w-6 h-6 text-brand-blue" />
+                </div>
+                <h3 className="text-xl font-heading font-bold text-gray-900 mb-2">{opt.name}</h3>
+                <p className="text-sm text-gray-500 mb-5">{opt.summary}</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-green mb-2">Advantages</p>
+                <ul className="space-y-1.5 mb-5">
+                  {opt.pros.map((p) => (
+                    <li key={p} className="flex items-start gap-2 text-sm text-gray-600">
+                      <CheckCircle className="w-4 h-4 text-brand-green mt-0.5 flex-shrink-0" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">Trade-offs</p>
+                <ul className="space-y-1.5 mb-5">
+                  {opt.cons.map((c) => (
+                    <li key={c} className="flex items-start gap-2 text-sm text-gray-500">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0" />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-4 border-t border-gray-200">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1.5 flex items-center gap-1.5">
+                    <Users className="w-3.5 h-3.5" /> Best for
+                  </p>
+                  <p className="text-sm text-gray-600">{opt.bestFor}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features included */}
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-heading font-bold text-gray-900 mb-4">Features We Set Up &amp; Support</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Whichever path you choose, we configure the capabilities that make a phone system actually work for your team.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {VOIP_FEATURES.map((f) => (
+              <div key={f} className="flex items-center gap-3 p-4 rounded-xl bg-white border border-gray-100">
+                <CheckCircle className="w-5 h-5 text-brand-green flex-shrink-0" />
+                <span className="text-sm text-gray-700">{f}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* On-Premise PBX */}
       <section className="bg-gray-50 py-24">
@@ -204,11 +379,28 @@ export default function VoIPSystemsPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="bg-white py-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-heading font-bold text-gray-900 mb-10 text-center">
+            Business VoIP — Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            {VOIP_FAQS.map((f) => (
+              <div key={f.q} className="p-6 rounded-2xl bg-gray-50 border border-gray-100">
+                <h3 className="font-semibold text-gray-900 mb-2">{f.q}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTABanner
         heading="Not Sure What Fits? Let's Talk."
-        subheading="We'll assess your needs and recommend the right solution — cloud, on-premise, or hybrid."
-        primaryCta={{ label: "Request a Free VoIP Consultation", href: "/contact" }}
-        secondaryCta={{ label: "View Our Partners", href: "/partners" }}
+        subheading="We'll assess your needs and recommend the right solution — hosted, on-premise, or hybrid."
+        primaryCta={{ label: "Schedule a Free Assessment", href: "/contact" }}
+        secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
         variant="dark"
       />
     </>

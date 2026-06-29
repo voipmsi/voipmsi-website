@@ -49,6 +49,7 @@ export default function Footer() {
                 { label: "Home", href: "/" },
                 { label: "About Us", href: "/about" },
                 { label: "Services", href: "/services" },
+                { label: "Service Areas", href: "/locations" },
                 { label: "Our Partners", href: "/partners" },
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
@@ -83,7 +84,7 @@ export default function Footer() {
                   href="/contact"
                   className="text-sm text-brand-green hover:text-white transition-colors font-medium"
                 >
-                  Request a Free Quote →
+                  Schedule a Free Assessment →
                 </Link>
               </li>
             </ul>
