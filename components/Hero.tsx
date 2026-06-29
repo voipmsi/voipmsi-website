@@ -2,16 +2,49 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { MapPin } from "lucide-react";
+import { trackPhoneClick } from "@/lib/analytics";
+
+interface CtaConfig {
+  label: string;
+  href: string;
+}
 
 interface HeroProps {
   badge?: string;
   headline: string;
   subheadline: string;
-  primaryCta?: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  primaryCta?: CtaConfig;
+  secondaryCta?: CtaConfig;
+  /** Small line rendered under the CTAs — used for the local "serving" message. */
+  note?: string;
   dark?: boolean;
   centered?: boolean;
   size?: "sm" | "md" | "lg";
+}
+
+// Renders a Next <Link> for internal routes, but a plain <a> for tel:/mailto:/http
+// links (Next Link is for client-side navigation only). Phone links are tracked.
+function CtaButton({ cta, className }: { cta: CtaConfig; className: string }) {
+  const isTel = cta.href.startsWith("tel:");
+  const isExternal = isTel || cta.href.startsWith("mailto:") || cta.href.startsWith("http");
+
+  if (isExternal) {
+    return (
+      <a
+        href={cta.href}
+        className={className}
+        onClick={isTel ? () => trackPhoneClick("hero") : undefined}
+      >
+        {cta.label}
+      </a>
+    );
+  }
+  return (
+    <Link href={cta.href} className={className}>
+      {cta.label}
+    </Link>
+  );
 }
 
 export default function Hero({
@@ -20,6 +53,7 @@ export default function Hero({
   subheadline,
   primaryCta,
   secondaryCta,
+  note,
   dark = true,
   centered = true,
   size = "lg",
@@ -29,6 +63,15 @@ export default function Hero({
     md: "pt-36 pb-20",
     lg: "pt-40 pb-28",
   };
+
+  const primaryClass =
+    "inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-brand-green/20 hover:shadow-brand-green/30 hover:-translate-y-0.5";
+
+  const secondaryClass = `inline-flex items-center justify-center px-7 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 border hover:-translate-y-0.5 ${
+    dark
+      ? "border-white/20 text-white hover:bg-white/10"
+      : "border-gray-300 text-gray-700 hover:bg-gray-50"
+  }`;
 
   return (
     <section
@@ -88,26 +131,19 @@ export default function Hero({
 
           {(primaryCta || secondaryCta) && (
             <div className={`flex flex-col sm:flex-row gap-4 ${centered ? "justify-center" : ""}`}>
-              {primaryCta && (
-                <Link
-                  href={primaryCta.href}
-                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-brand-green/20 hover:shadow-brand-green/30 hover:-translate-y-0.5"
-                >
-                  {primaryCta.label}
-                </Link>
-              )}
-              {secondaryCta && (
-                <Link
-                  href={secondaryCta.href}
-                  className={`inline-flex items-center justify-center px-7 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 border hover:-translate-y-0.5 ${
-                    dark
-                      ? "border-white/20 text-white hover:bg-white/10"
-                      : "border-gray-300 text-gray-700 hover:bg-gray-50"
-                  }`}
-                >
-                  {secondaryCta.label}
-                </Link>
-              )}
+              {primaryCta && <CtaButton cta={primaryCta} className={primaryClass} />}
+              {secondaryCta && <CtaButton cta={secondaryCta} className={secondaryClass} />}
+            </div>
+          )}
+
+          {note && (
+            <div
+              className={`mt-7 inline-flex items-center gap-2 text-sm font-medium ${
+                dark ? "text-gray-300" : "text-gray-600"
+              } ${centered ? "" : ""}`}
+            >
+              <MapPin className="w-4 h-4 text-brand-green flex-shrink-0" />
+              <span>{note}</span>
             </div>
           )}
         </motion.div>

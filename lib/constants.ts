@@ -173,10 +173,33 @@ export const IP_PHONES = {
 };
 
 export const SERVICES_NAV = [
-  { label: "VoIP Systems", href: "/services/voip-systems" },
+  { label: "Business Internet & ISP", href: "/services/business-internet" },
+  { label: "Network Setup", href: "/services/network-setup" },
   { label: "Structured Cabling", href: "/services/structured-cabling" },
+  { label: "Business VoIP Phone Systems", href: "/services/voip-systems" },
   { label: "Security Cameras", href: "/services/security-cameras" },
 ];
+
+// Primary South Florida communities we serve. Drives local-SEO city pages
+// (Phase 2) and "service area" content. Lauderhill is our home base.
+export const SERVICE_AREAS = [
+  { name: "Lauderhill", slug: "lauderhill", county: "Broward County" },
+  { name: "Fort Lauderdale", slug: "fort-lauderdale", county: "Broward County" },
+  { name: "Plantation", slug: "plantation", county: "Broward County" },
+  { name: "Sunrise", slug: "sunrise", county: "Broward County" },
+  { name: "Tamarac", slug: "tamarac", county: "Broward County" },
+  { name: "Lauderdale Lakes", slug: "lauderdale-lakes", county: "Broward County" },
+  { name: "Oakland Park", slug: "oakland-park", county: "Broward County" },
+  { name: "Davie", slug: "davie", county: "Broward County" },
+  { name: "Coral Springs", slug: "coral-springs", county: "Broward County" },
+];
+
+// Core positioning line — reused across hero, footer, and metadata.
+export const POSITIONING =
+  "From the internet connection to the phone on your desk, VoIP Made Simple Inc. makes business communications simple.";
+
+export const SERVING_LINE =
+  "Serving Lauderhill, Fort Lauderdale and businesses throughout Broward County.";
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },

@@ -28,7 +28,11 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         ...data,
-        source: "Website Quote Form (Server Proxy)",
+        // `formType` and `pagePath` come from the client so GHL can attribute
+        // the lead source (which CTA / which page produced it).
+        source: data.formType
+          ? `Website — ${data.formType}`
+          : "Website Lead Form",
         timestamp: new Date().toISOString(),
       }),
     });

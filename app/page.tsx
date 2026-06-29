@@ -12,21 +12,28 @@ import {
   CheckCircle,
   ArrowRight,
   Server,
+  Wifi,
+  Search,
+  GitCompareArrows,
+  PencilRuler,
+  Wrench,
+  AlertTriangle,
 } from "lucide-react";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
 import FeatureCard from "@/components/FeatureCard";
 import CTABanner from "@/components/CTABanner";
 import QuoteForm from "@/components/QuoteForm";
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, SERVING_LINE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "voIPmsi — Business VoIP Phone Systems | VoIP Made Simple Inc.",
+  title: "Business Internet, Networks & VoIP in Broward County | VoIP Made Simple Inc.",
   description:
-    "South Florida's trusted VoIP partner for 30+ years. Enterprise phone systems, structured cabling, and security cameras. Authorized Grandstream distributor. Request a free quote today.",
+    "Your local Lauderhill partner for business internet, data networks, structured cabling and VoIP phone systems. Serving Fort Lauderdale and all of Broward County for 30+ years. Schedule a free assessment.",
   openGraph: {
-    title: "voIPmsi — VoIP Made Simple Inc.",
-    description: "30+ years of telecom expertise. Modern VoIP solutions for South Florida businesses.",
+    title: "VoIP Made Simple Inc. — Business Internet, Networks & VoIP",
+    description:
+      "From the internet connection to the phone on your desk, we make South Florida business communications simple. 30+ years, based in Lauderhill, FL.",
   },
 };
 
@@ -55,8 +62,15 @@ const JSON_LD = {
     },
   ],
   description:
-    "Business VoIP phone systems, structured cabling, and security cameras for South Florida businesses. 30+ years of telecom experience.",
-  areaServed: { "@type": "State", name: "Florida" },
+    "Local business communications and network company in Lauderhill, FL. Business internet selection, data network design, structured cabling, business VoIP phone systems, and security cameras for South Florida businesses. 30+ years of telecom experience.",
+  areaServed: [
+    { "@type": "City", name: "Lauderhill" },
+    { "@type": "City", name: "Fort Lauderdale" },
+    { "@type": "City", name: "Plantation" },
+    { "@type": "City", name: "Sunrise" },
+    { "@type": "City", name: "Tamarac" },
+    { "@type": "AdministrativeArea", name: "Broward County" },
+  ],
 };
 
 const TESTIMONIALS = [
@@ -92,11 +106,12 @@ export default function HomePage() {
       />
 
       <Hero
-        badge="30+ Years of Telecom Expertise"
-        headline="From Legacy Telecom to Modern VoIP — Made Simple."
-        subheadline="For over 30 years, VoIP Made Simple Inc. has helped businesses across South Florida and beyond stay connected. We've evolved with the industry — so you don't have to figure it out alone."
-        primaryCta={{ label: "Request a Free Quote", href: "/contact" }}
-        secondaryCta={{ label: "Explore Services", href: "/services" }}
+        badge="30+ Years in Telecom · Based in Lauderhill, FL"
+        headline="Your Local Partner for Business Internet, Networks and VoIP."
+        subheadline="VoIP Made Simple Inc. helps South Florida businesses select the right internet provider, build reliable data networks, install structured cabling, and choose the right business phone system — hosted, on-premise, or hybrid."
+        primaryCta={{ label: "Schedule a Free Assessment", href: "/contact" }}
+        secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
+        note={SERVING_LINE}
       />
 
       {/* Trust Bar */}
@@ -127,34 +142,116 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 mb-4">
-              Complete Communication Solutions Under One Roof
+              One Local Partner — From the Internet to the Phone on Your Desk
             </h2>
             <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-              Whether you&apos;re modernizing a single office or rolling out a multi-site enterprise system, we deliver the hardware, infrastructure, and connectivity to keep your business running.
+              We&apos;re not just selling phones. We design and install the complete communication infrastructure that keeps your internet, network, Wi-Fi, phones, and connected devices working as one.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <ServiceCard
-              icon={<Phone className="w-6 h-6 text-brand-blue" />}
-              title="VoIP Phone Systems"
-              description="On-premise PBX systems and hosted cloud VoIP solutions from the brands you trust. Scalable, reliable, and built for the way you work today."
-              href="/services/voip-systems"
+              icon={<Wifi className="w-6 h-6 text-brand-blue" />}
+              title="Business Internet & ISP Solutions"
+              description="We help you compare fiber, cable, broadband, dedicated internet and backup options — then order and coordinate the right service through our carrier relationships."
+              href="/services/business-internet"
               index={0}
             />
             <ServiceCard
               icon={<Network className="w-6 h-6 text-brand-blue" />}
-              title="Structured Cabling"
-              description="Professional data network design, installation, and certification. The backbone of every reliable communication system."
-              href="/services/structured-cabling"
+              title="Network Setup & Structured Cabling"
+              description="Switches, routers, Wi-Fi, VLANs, racks, patch panels and Cat6/Cat6a and fiber cabling — designed, installed, labeled and documented."
+              href="/services/network-setup"
               index={1}
             />
             <ServiceCard
-              icon={<Camera className="w-6 h-6 text-brand-blue" />}
-              title="Security Cameras"
-              description="Protect your people, property, and assets with state-of-the-art IP surveillance and remote monitoring solutions."
-              href="/services/security-cameras"
+              icon={<Phone className="w-6 h-6 text-brand-blue" />}
+              title="Business VoIP Phone Systems"
+              description="Hosted cloud VoIP, on-premise IP PBX, or hybrid — we help you choose, then install and support Grandstream, Yealink, Cisco and more."
+              href="/services/voip-systems"
               index={2}
             />
+            <ServiceCard
+              icon={<Camera className="w-6 h-6 text-brand-blue" />}
+              title="Security Camera Systems"
+              description="Professional IP camera systems with remote access — installed with the same clean cabling and labeling standard as the rest of your network."
+              href="/services/security-cameras"
+              index={3}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* One Local Partner — Process */}
+      <section className="bg-white py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 mb-4">
+              One Local Partner From Internet to Phones
+            </h2>
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+              Most businesses juggle a separate internet company, cabling crew, network person and phone vendor. We bring it all together — one team, one plan, one point of accountability.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Search, step: "01", title: "Assess the Business", description: "We learn how your business works, what's failing today, and what you actually need — on site, in person." },
+              { icon: GitCompareArrows, step: "02", title: "Compare Options", description: "We compare internet providers and technology options — fiber, cable, hosted vs. on-premise — with honest trade-offs." },
+              { icon: PencilRuler, step: "03", title: "Design the System", description: "We design the network and communication system: cabling, switches, Wi-Fi, phones and cameras as one cohesive plan." },
+              { icon: Wrench, step: "04", title: "Install & Support", description: "We install, configure, test, train your team — and stay your local point of contact for ongoing service." },
+            ].map((s, i) => (
+              <div key={s.step} className="relative p-7 rounded-2xl bg-gray-50 border border-gray-100">
+                <div className="text-5xl font-heading font-bold text-gray-100 absolute top-5 right-6 select-none">{s.step}</div>
+                <div className="w-11 h-11 rounded-xl bg-brand-blue/10 flex items-center justify-center mb-4">
+                  <s.icon className="w-5 h-5 text-brand-blue" />
+                </div>
+                <h3 className="font-heading font-semibold text-gray-900 mb-2">{s.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{s.description}</p>
+                {i < 3 && <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-px bg-gray-200" />}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Common Problems */}
+      <section className="bg-gray-50 py-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200 mb-4">
+              <AlertTriangle className="w-3.5 h-3.5" />
+              Sound Familiar?
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 mb-4">
+              The Problems We Solve Every Day
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              "Internet is too slow or unreliable",
+              "Phone calls keep dropping",
+              "Wi-Fi coverage is poor in parts of the office",
+              "Office wiring is outdated or disorganized",
+              "The business is moving or expanding to a new location",
+              "The current phone bill is too expensive",
+              "Not sure whether to choose cloud or on-premise VoIP",
+              "Different vendors blame each other when something fails",
+            ].map((problem) => (
+              <div key={problem} className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-100">
+                <CheckCircle className="w-5 h-5 text-brand-green mt-0.5 flex-shrink-0" />
+                <span className="text-sm text-gray-700">{problem}</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-lg text-gray-700 font-medium mt-10 max-w-2xl mx-auto">
+            We bring the internet, network, cabling and phone system together so everything works as one complete solution.
+          </p>
+          <div className="text-center mt-8">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm transition-all shadow-lg shadow-brand-green/20 hover:-translate-y-0.5"
+            >
+              Schedule a Free Assessment <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -318,28 +415,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Quote Form */}
+      {/* Assessment Form */}
       <section className="bg-brand-dark py-24" id="quote">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-4">
-              Request a Free Quote
+              Schedule a Free Assessment
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
-              Fill out the form below and one of our specialists will get back to you within one business day with a custom, no-obligation quote.
+              Tell us about your business and what&apos;s not working. One of our local specialists will reach out within one business day — no pressure, no obligation.
             </p>
           </div>
           <div className="bg-brand-navy border border-white/10 rounded-2xl p-8">
-            <QuoteForm dark />
+            <QuoteForm dark formType="Free Assessment (Homepage)" />
           </div>
         </div>
       </section>
 
       <CTABanner
-        heading="Ready to Simplify Your Business Communications?"
-        subheading="Get a no-pressure consultation and a free custom quote within 24 hours."
-        primaryCta={{ label: "Request a Free Quote", href: "/contact" }}
-        secondaryCta={{ label: "Explore Services", href: "/services" }}
+        heading="From the Internet Connection to the Phone on Your Desk."
+        subheading="One local partner makes your business communications simple. Get a free, no-pressure assessment."
+        primaryCta={{ label: "Schedule a Free Assessment", href: "/contact" }}
+        secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
         variant="dark"
       />
     </>

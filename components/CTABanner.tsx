@@ -3,13 +3,43 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { trackPhoneClick } from "@/lib/analytics";
+
+interface CtaConfig {
+  label: string;
+  href: string;
+}
 
 interface CTABannerProps {
   heading: string;
   subheading?: string;
-  primaryCta: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  primaryCta: CtaConfig;
+  secondaryCta?: CtaConfig;
   variant?: "green" | "blue" | "dark";
+}
+
+// Internal routes use Next <Link>; tel:/mailto:/http use a plain <a>. Phone links tracked.
+function BannerCta({ cta, className }: { cta: CtaConfig; className: string }) {
+  const isTel = cta.href.startsWith("tel:");
+  const isExternal = isTel || cta.href.startsWith("mailto:") || cta.href.startsWith("http");
+  const content = (
+    <>
+      {cta.label}
+      <ArrowRight className="w-4 h-4" />
+    </>
+  );
+  if (isExternal) {
+    return (
+      <a href={cta.href} className={className} onClick={isTel ? () => trackPhoneClick("cta_banner") : undefined}>
+        {content}
+      </a>
+    );
+  }
+  return (
+    <Link href={cta.href} className={className}>
+      {content}
+    </Link>
+  );
 }
 
 export default function CTABanner({
@@ -49,20 +79,15 @@ export default function CTABanner({
             <p className="text-lg text-white/75 mb-8 max-w-xl mx-auto">{subheading}</p>
           )}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href={primaryCta.href}
+            <BannerCta
+              cta={primaryCta}
               className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 ${primaryBtn}`}
-            >
-              {primaryCta.label}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            />
             {secondaryCta && (
-              <Link
-                href={secondaryCta.href}
+              <BannerCta
+                cta={secondaryCta}
                 className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 ${secondaryBtn}`}
-              >
-                {secondaryCta.label}
-              </Link>
+              />
             )}
           </div>
         </motion.div>

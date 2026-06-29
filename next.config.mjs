@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Serve modern formats automatically when real photos are added via next/image.
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [],
   },
   async headers() {
