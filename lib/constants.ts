@@ -172,8 +172,7 @@ export const IP_PHONES = {
       series: "8800 Series",
       tier: "Executive",
       description: "5-line phone with 5\" color display, HD video, and Wi-Fi.",
-      image: "", // source image too low-res (62x47) — awaiting a higher-res photo
-
+      image: "/images/phones/cisco-8845.jpg",
     },
     {
       model: "8865",
