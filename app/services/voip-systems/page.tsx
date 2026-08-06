@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { CheckCircle, Cloud, Server, Phone, Wifi, Monitor, Layers, Users } from "lucide-react";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
@@ -221,16 +222,27 @@ export default function VoIPSystemsPage() {
       {/* On-Premise PBX */}
       <section className="bg-gray-50 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-brand-green/10 text-brand-green border border-brand-green/20 mb-4">
-              Authorized Grandstream Distributor
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-brand-green/10 text-brand-green border border-brand-green/20 mb-4">
+                Authorized Grandstream Distributor
+              </div>
+              <h2 className="text-3xl font-heading font-bold text-gray-900 mb-4">
+                On-Premise IP PBX Systems
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                When you need full control over your communications — voicemail, call routing, security, and integrations — an on-premise PBX delivers. As an authorized Grandstream partner and distributor, we specialize in the Grandstream UCM series: the most capable, most affordable IP PBX systems on the market.
+              </p>
             </div>
-            <h2 className="text-3xl font-heading font-bold text-gray-900 mb-4">
-              On-Premise IP PBX Systems
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              When you need full control over your communications — voicemail, call routing, security, and integrations — an on-premise PBX delivers. As an authorized Grandstream partner and distributor, we specialize in the Grandstream UCM series: the most capable, most affordable IP PBX systems on the market.
-            </p>
+            <div className="relative w-full aspect-[4/3] rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden">
+              <Image
+                src="/images/ucm/ucm6300-series.webp"
+                alt="Grandstream UCM6300 series on-premise IP PBX appliances — desktop and rack-mount models"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain p-6"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
@@ -276,6 +288,15 @@ export default function VoIPSystemsPage() {
                   key={phone.model}
                   className="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brand-blue/20 hover:shadow-sm transition-all"
                 >
+                  <div className="relative w-full aspect-square mb-4 rounded-xl bg-white border border-gray-100 overflow-hidden">
+                    <Image
+                      src={phone.image}
+                      alt={`Grandstream ${phone.model} business IP desk phone`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-contain p-3"
+                    />
+                  </div>
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="font-heading font-bold text-gray-900">{phone.model}</h3>
                     <span className={`px-2 py-0.5 rounded text-xs font-medium ${PHONE_TIERS[phone.tier]?.color}`}>

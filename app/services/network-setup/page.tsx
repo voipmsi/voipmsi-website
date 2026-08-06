@@ -145,11 +145,12 @@ export default function NetworkSetupPage() {
             </div>
             <div className="relative w-full aspect-video overflow-hidden rounded-2xl border border-gray-200 shadow-sm">
               <Image
-                src="/images/network-rack-hero.jpg"
+                src="/images/network-rack-hero.png"
                 alt="VoIP Made Simple technician terminating Cat6 cabling into a labeled patch panel on a clean network rack in a bright Broward County, Florida office"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
+                priority
               />
             </div>
           </div>

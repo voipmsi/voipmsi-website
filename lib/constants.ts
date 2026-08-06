@@ -98,24 +98,28 @@ export const IP_PHONES = {
       line: "2-line",
       tier: "Entry Level",
       description: "Affordable, carrier-grade IP phone with HD audio.",
+      image: "/images/phones/grp2601.png",
     },
     {
       model: "GRP2612W",
       line: "2-line",
       tier: "Standard",
       description: "2-line Wi-Fi phone with built-in PoE and dual-band wireless.",
+      image: "/images/phones/grp2612.png",
     },
     {
       model: "GRP2624",
       line: "4-line",
       tier: "Business",
       description: "4-line phone with color display and Bluetooth for busy professionals.",
+      image: "/images/phones/grp2624.png",
     },
     {
       model: "GRP2670",
       line: "6-line",
       tier: "Executive",
       description: "6-line executive phone with 4.3\" color display, Wi-Fi, Bluetooth, and USB.",
+      image: "/images/phones/grp2670.png",
     },
   ],
   yealink: [
