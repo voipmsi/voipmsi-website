@@ -324,6 +324,15 @@ export default function VoIPSystemsPage() {
                   key={phone.model}
                   className="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brand-blue/20 hover:shadow-sm transition-all"
                 >
+                  <div className="relative w-full aspect-square mb-4 rounded-xl bg-white border border-gray-100 overflow-hidden">
+                    <Image
+                      src={phone.image}
+                      alt={`Yealink ${phone.model} business IP desk phone`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-contain p-3"
+                    />
+                  </div>
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="font-heading font-bold text-gray-900">{phone.model}</h3>
                     <span className={`px-2 py-0.5 rounded text-xs font-medium ${PHONE_TIERS[phone.tier]?.color}`}>
@@ -351,6 +360,17 @@ export default function VoIPSystemsPage() {
                   key={phone.model}
                   className="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brand-blue/20 hover:shadow-sm transition-all"
                 >
+                  {phone.image && (
+                    <div className="relative w-full aspect-square mb-4 rounded-xl bg-white border border-gray-100 overflow-hidden">
+                      <Image
+                        src={phone.image}
+                        alt={`Cisco ${phone.model} business IP desk phone`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        className="object-contain p-3"
+                      />
+                    </div>
+                  )}
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="font-heading font-bold text-gray-900">{phone.model}</h3>
                     <span className={`px-2 py-0.5 rounded text-xs font-medium ${PHONE_TIERS[phone.tier]?.color}`}>

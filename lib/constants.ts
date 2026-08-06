@@ -128,24 +128,28 @@ export const IP_PHONES = {
       series: "T3 Series",
       tier: "Entry Level",
       description: "Reliable 2-line phone with HD audio — ideal for general staff.",
+      image: "/images/phones/yealink-t31p.jpg",
     },
     {
       model: "T46U",
       series: "T4 Series",
       tier: "Business",
       description: "16-line color display phone with USB recording and Bluetooth.",
+      image: "/images/phones/yealink-t46u.jpg",
     },
     {
       model: "T54W",
       series: "T5 Series",
       tier: "Power User",
       description: "16-line 4.3\" color screen with Wi-Fi, Bluetooth, and USB.",
+      image: "/images/phones/yealink-t54w.jpg",
     },
     {
       model: "T57W",
       series: "T5 Series",
       tier: "Executive",
       description: "7\" touchscreen executive phone — the gold standard for C-suite deployments.",
+      image: "/images/phones/yealink-t57w.jpg",
     },
   ],
   cisco: [
@@ -154,24 +158,29 @@ export const IP_PHONES = {
       series: "7800 Series",
       tier: "Business",
       description: "4-line SIP phone with full-duplex speakerphone and wideband audio.",
+      image: "/images/phones/cisco-7841.jpg",
     },
     {
       model: "8841",
       series: "8800 Series",
       tier: "Business+",
       description: "5-line phone with 5\" grayscale display and Gigabit Ethernet.",
+      image: "/images/phones/cisco-8841.jpg",
     },
     {
       model: "8845",
       series: "8800 Series",
       tier: "Executive",
       description: "5-line phone with 5\" color display, HD video, and Wi-Fi.",
+      image: "", // source image too low-res (62x47) — awaiting a higher-res photo
+
     },
     {
       model: "8865",
       series: "8800 Series",
       tier: "Enterprise",
       description: "5-line HD video phone with 5\" color touchscreen and Wi-Fi for executive suites.",
+      image: "/images/phones/cisco-8865.jpg",
     },
   ],
 };
@@ -204,7 +213,7 @@ export const POSITIONING =
   "From the internet connection to the phone on your desk, VoIP Made Simple Inc. makes business communications simple.";
 
 export const SERVING_LINE =
-  "Serving Lauderhill, Fort Lauderdale and businesses throughout Broward County.";
+  "Serving Lauderhill, Fort Lauderdale and businesses throughout Broward, Miami-Dade and Palm Beach County.";
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
