@@ -226,27 +226,27 @@ export default function Navbar() {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            {/*
-              SWAP IN: Replace this placeholder with your actual GHL calendar embed:
+            {process.env.NEXT_PUBLIC_GHL_CALENDAR_URL ? (
               <iframe
                 src={process.env.NEXT_PUBLIC_GHL_CALENDAR_URL}
                 style={{ width: "100%", height: "600px", border: "none" }}
                 title="Book a Call"
               />
-            */}
-            <div className="flex flex-col items-center justify-center py-16 px-8 text-center">
-              <Calendar className="w-12 h-12 text-brand-blue mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Calendar Coming Soon</h3>
-              <p className="text-gray-500 mb-6 max-w-sm">
-                Add your Go HighLevel calendar URL to <code className="bg-gray-100 px-1 rounded">.env.local</code> to enable online booking.
-              </p>
-              <a
-                href={COMPANY.phoneHref}
-                className="px-6 py-3 bg-brand-blue hover:bg-brand-blue-dark text-white rounded-lg font-semibold transition-colors"
-              >
-                Call Us Now: {COMPANY.phone}
-              </a>
-            </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-16 px-8 text-center">
+                <Calendar className="w-12 h-12 text-brand-blue mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Calendar Coming Soon</h3>
+                <p className="text-gray-500 mb-6 max-w-sm">
+                  Add your Go HighLevel calendar URL to <code className="bg-gray-100 px-1 rounded">.env.local</code> to enable online booking.
+                </p>
+                <a
+                  href={COMPANY.phoneHref}
+                  className="px-6 py-3 bg-brand-blue hover:bg-brand-blue-dark text-white rounded-lg font-semibold transition-colors"
+                >
+                  Call Us Now: {COMPANY.phone}
+                </a>
+              </div>
+            )}
           </div>
         </div>
       )}
