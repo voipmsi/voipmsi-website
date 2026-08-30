@@ -40,3 +40,4 @@ next-env.d.ts
 
 # local agent / editor tooling
 .claude/
+CLAUDE.local.md
