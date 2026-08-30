@@ -4,7 +4,7 @@
 
 ## Where everything lives
 
-- **Local folder:** `C:\Users\vmsqu\New Web2\voipmsi`
+- **Local folder:** `C:\Users\vmsqu\MyProjectsVmsi\New Web2\voipmsi`
 - **GitHub repo:** `git@github.com:voipmsi/voipmsi-website.git` (org: `voipmsi`, repo: `voipmsi-website`)
 - **Live site:** **https://voipmsi.com** — hosted on **Vercel**, auto-deploys from GitHub `main` on every push
 - **Default branch:** `main`
