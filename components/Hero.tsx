@@ -2,12 +2,18 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { trackPhoneClick } from "@/lib/analytics";
 
 interface CtaConfig {
   label: string;
   href: string;
+}
+
+interface SideImageConfig {
+  src: string;
+  alt: string;
 }
 
 interface HeroProps {
@@ -21,6 +27,9 @@ interface HeroProps {
   dark?: boolean;
   centered?: boolean;
   size?: "sm" | "md" | "lg";
+  /** Optional product images floated in the empty gutters beside a centered headline (xl+ screens only). */
+  leftImage?: SideImageConfig;
+  rightImage?: SideImageConfig;
 }
 
 // Renders a Next <Link> for internal routes, but a plain <a> for tel:/mailto:/http
@@ -57,6 +66,8 @@ export default function Hero({
   dark = true,
   centered = true,
   size = "lg",
+  leftImage,
+  rightImage,
 }: HeroProps) {
   const sizeClasses = {
     sm: "pt-32 pb-16",
@@ -93,6 +104,44 @@ export default function Hero({
             }}
           />
         </>
+      )}
+
+      {leftImage && (
+        <motion.div
+          initial={{ opacity: 0, x: -24, y: -10 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="hidden xl:block absolute left-6 2xl:left-16 top-1/2 -translate-y-1/2 w-40 2xl:w-48"
+        >
+          <div className="relative aspect-square rounded-2xl bg-white shadow-2xl shadow-black/30 border border-white/10 overflow-hidden p-4">
+            <Image
+              src={leftImage.src}
+              alt={leftImage.alt}
+              fill
+              sizes="192px"
+              className="object-contain p-3"
+            />
+          </div>
+        </motion.div>
+      )}
+
+      {rightImage && (
+        <motion.div
+          initial={{ opacity: 0, x: 24, y: -10 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="hidden xl:block absolute right-6 2xl:right-16 top-1/2 -translate-y-1/2 w-40 2xl:w-48"
+        >
+          <div className="relative aspect-square rounded-2xl bg-white shadow-2xl shadow-black/30 border border-white/10 overflow-hidden p-4">
+            <Image
+              src={rightImage.src}
+              alt={rightImage.alt}
+              fill
+              sizes="192px"
+              className="object-contain p-3"
+            />
+          </div>
+        </motion.div>
       )}
 
       <div className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${centered ? "text-center" : ""}`}>

@@ -112,6 +112,14 @@ export default function HomePage() {
         primaryCta={{ label: "Schedule a Free Assessment", href: "/contact" }}
         secondaryCta={{ label: `Call ${COMPANY.phone}`, href: COMPANY.phoneHref }}
         note={SERVING_LINE}
+        leftImage={{
+          src: "/images/hero/video-collaboration.webp",
+          alt: "VoIP softphone app for video calls and collaboration on laptop and mobile",
+        }}
+        rightImage={{
+          src: "/images/hero/phone-system.webp",
+          alt: "On-premise IP PBX phone system with desk phone, monitor and mobile app",
+        }}
       />
 
       {/* Trust Bar */}
