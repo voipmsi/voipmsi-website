@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, ChevronDown, Calendar } from "lucide-react";
@@ -45,17 +46,15 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="flex items-center gap-1">
-                <div className="flex items-center bg-brand-navy border border-brand-green/20 rounded-lg px-3 py-1.5">
-                  <span className="font-heading font-bold text-xl text-white tracking-tight">
-                    vo<span className="text-brand-green">I</span>Pmsi
-                  </span>
-                </div>
-              </div>
-              <div className="hidden sm:block">
-                <p className="text-xs text-gray-400 leading-tight">VoIP Made Simple Inc.</p>
-              </div>
+            <Link href="/" className="flex items-center group">
+              <Image
+                src="/images/logo/voipmsi-logo.png"
+                alt="VoIPmsi"
+                width={2560}
+                height={970}
+                priority
+                className="h-10 lg:h-12 w-auto"
+              />
             </Link>
 
             {/* Desktop Nav */}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { COMPANY, SERVICES_NAV } from "@/lib/constants";
@@ -12,11 +13,13 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <div className="flex items-center bg-brand-navy border border-brand-green/20 rounded-lg px-3 py-1.5 w-fit">
-                <span className="font-heading font-bold text-xl text-white tracking-tight">
-                  vo<span className="text-brand-green">I</span>Pmsi
-                </span>
-              </div>
+              <Image
+                src="/images/logo/voipmsi-logo.png"
+                alt="VoIPmsi"
+                width={2560}
+                height={970}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed mb-6">
               Three decades of telecom expertise. One trusted partner for VoIP, cabling, and security.

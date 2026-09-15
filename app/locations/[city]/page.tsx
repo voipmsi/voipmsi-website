@@ -38,7 +38,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: COMPANY.name,
-    image: "https://voipmsi.com/favicon.svg",
+    image: "https://voipmsi.com/icon-512.png",
     url: `https://voipmsi.com/locations/${city.slug}`,
     telephone: COMPANY.phone,
     email: COMPANY.email,
